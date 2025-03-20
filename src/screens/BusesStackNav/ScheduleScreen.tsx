@@ -55,11 +55,11 @@ const ScheduleScreen = ({ route, navigation }) => {
           </DataTable.Header>
           <ScrollView nestedScrollEnabled>
             {departures != null &&
-              departures.map((item) => (
+              departures?.map((item) => (
                 <DataTable.Row key={item.id}>
                   <DataTable.Cell>{item.hour}</DataTable.Cell>
                   <DataTable.Cell style={{ flex: 2 }}>
-                    {item.departure.map(
+                    {item.departure?.map(
                       (minute, index) =>
                         minute.dayOfWeek == 0 && (
                           <Button
@@ -83,7 +83,7 @@ const ScheduleScreen = ({ route, navigation }) => {
                             }
                           >
                             {String(minute.minute).padStart(2, "0")}
-                            {minute.routeInfo.map((info) => (
+                            {minute.routeInfo?.map((info) => (
                               <Text style={{ fontSize: 15 }}>
                                 {routeInfo[info]}
                               </Text>
@@ -93,7 +93,7 @@ const ScheduleScreen = ({ route, navigation }) => {
                     )}
                   </DataTable.Cell>
                   <DataTable.Cell>
-                    {item.departure.map(
+                    {item.departure?.map(
                       (minute, index) =>
                         minute.dayOfWeek == 1 && (
                           <Button
@@ -117,7 +117,7 @@ const ScheduleScreen = ({ route, navigation }) => {
                             }
                           >
                             {String(minute.minute).padStart(2, "0")}
-                            {minute.routeInfo.map((info) => (
+                            {minute.routeInfo?.map((info) => (
                               <Text style={{ fontSize: 15 }}>
                                 {routeInfo[info]}
                               </Text>
@@ -127,7 +127,7 @@ const ScheduleScreen = ({ route, navigation }) => {
                     )}
                   </DataTable.Cell>
                   <DataTable.Cell>
-                    {item.departure.map(
+                    {item.departure?.map(
                       (minute, index) =>
                         minute.dayOfWeek == 2 && (
                           <Button
@@ -151,7 +151,7 @@ const ScheduleScreen = ({ route, navigation }) => {
                             }
                           >
                             {String(minute.minute).padStart(2, "0")}
-                            {minute.routeInfo.map((info) => (
+                            {minute.routeInfo?.map((info) => (
                               <Text style={{ fontSize: 15 }}>
                                 {routeInfo[info]}
                               </Text>
