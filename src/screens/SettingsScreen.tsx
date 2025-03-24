@@ -24,7 +24,10 @@ const SettingsScreen = ({ navigation }) => {
     },
   ];
   return (
-    <View style={{ backgroundColor: theme.colors.background, flex: 1 }}>
+    <View
+      testID="kurwaaa"
+      style={{ backgroundColor: theme.colors.background, flex: 1 }}
+    >
       <Header
         title="Ustawienia"
         leftHeader={{
@@ -45,6 +48,7 @@ const SettingsScreen = ({ navigation }) => {
           >
             <Text style={{ fontSize: 17 }}>{option.title}</Text>
             <IconButton
+              testID="actual-icon-button"
               icon={option.icon}
               size={29}
               onPress={option.function}

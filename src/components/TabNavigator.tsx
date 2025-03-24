@@ -8,7 +8,7 @@ import api from "../services/api";
 
 const Tab = createMaterialTopTabNavigator();
 
-const Table = ({ navigation, route }) => {
+export const Table = ({ navigation, route }) => {
   const { theme } = useContext(ThemeContext);
   const { busRouteDirectionId, busId, busName, direction } = route.params;
   const [busRouteStops, setBusRouteStops] = useState([]);
@@ -76,6 +76,7 @@ const TabNavigator = ({ data, bus }) => {
     >
       <Tab.Screen
         name={`Do: ${data[0].name}`}
+        options={{ tabBarTestID: "first-tab-bar-item" }}
         component={Table}
         initialParams={{
           busRouteDirectionId: data[0].id,
@@ -86,6 +87,7 @@ const TabNavigator = ({ data, bus }) => {
       />
       <Tab.Screen
         name={`Do: ${data[1].name}`}
+        options={{ tabBarTestID: "second-tab-bar-item" }}
         component={Table}
         initialParams={{
           busRouteDirectionId: data[1].id,
