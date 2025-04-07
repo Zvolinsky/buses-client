@@ -1,9 +1,13 @@
 import React from "react";
 import { render, screen } from "@testing-library/react-native";
-import TabNavigator from "../TabNavigator"; // Adjust the import path as needed
+import TabNavigator from "../TabNavigator";
 import { NavigationContainer } from "@react-navigation/native";
 
 describe("TabNavigator", () => {
+  beforeEach(() => {
+    jest.spyOn(console, "error").mockImplementation(() => {});
+  });
+
   const data = [
     { bus: null, busId: 1, id: 1, name: "MEDYNIA GŁOG., ZADWÓR PĘTLA" },
     { bus: null, busId: 1, id: 2, name: "RZESZÓW D.A." },

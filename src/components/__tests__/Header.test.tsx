@@ -5,6 +5,10 @@ import { ThemeContext } from "../../Layout";
 import { MD3DarkTheme } from "react-native-paper";
 
 describe("Header Component", () => {
+  beforeEach(() => {
+    jest.spyOn(console, "error").mockImplementation(() => {});
+  });
+
   const theme = MD3DarkTheme;
   const setIsDarkMode = jest.fn();
   it("renders the title correctly", () => {

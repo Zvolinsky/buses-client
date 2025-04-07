@@ -1,6 +1,6 @@
-const baseURL = "http://192.168.100.116:7061/";
+export const baseURL = "http://192.168.100.116:7061/";
 
-const entities = {
+export const entities = {
   buses: "api/Buses/",
   busStops: "api/BusStops/",
   busRouteDirections: "api/BusRouteDirections/",
