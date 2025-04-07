@@ -46,6 +46,7 @@ export const Table = ({ navigation, route }) => {
                 busId: busId,
                 busStopId: item.busStopId,
                 busName: busName,
+                busRouteDirectionId: busRouteDirectionId,
                 direction: direction,
               })
             }

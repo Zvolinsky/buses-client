@@ -24,10 +24,7 @@ const SettingsScreen = ({ navigation }) => {
     },
   ];
   return (
-    <View
-      testID="kurwaaa"
-      style={{ backgroundColor: theme.colors.background, flex: 1 }}
-    >
+    <View style={{ backgroundColor: theme.colors.background, flex: 1 }}>
       <Header
         title="Ustawienia"
         leftHeader={{

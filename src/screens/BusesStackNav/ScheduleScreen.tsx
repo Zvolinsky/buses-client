@@ -9,13 +9,14 @@ import { ThemeContext } from "../../Layout";
 
 const ScheduleScreen = ({ route, navigation }) => {
   const { theme } = useContext(ThemeContext);
-  const { busId, busStopId, busName, direction } = route.params;
+  const { busId, busStopId, busName, busRouteDirectionId, direction } =
+    route.params;
   const [departures, setDepartures] = useState(null);
   const [departureInfo, setDepartureInfo] = useState(null);
 
-  function getDepartures(busId, busStopId) {
+  function getDepartures(busId, busStopId, busRouteDirectionId) {
     fetch(
-      `${api.getDepartures}?busId=${busId}&busStopId=${busStopId}&busRoutes=true`
+      `${api.getDepartures}?busId=${busId}&busStopId=${busStopId}&busRouteDirectionId=${busRouteDirectionId}&busRoutes=true`
     )
       .then((response) => response.json())
       .then((json) => {
@@ -28,7 +29,7 @@ const ScheduleScreen = ({ route, navigation }) => {
   }
   useEffect(() => {
     setDepartures(null);
-    getDepartures(busId, busStopId);
+    getDepartures(busId, busStopId, busRouteDirectionId);
   }, []);
 
   return (
@@ -49,16 +50,16 @@ const ScheduleScreen = ({ route, navigation }) => {
         <DataTable style={{ height: 500 }}>
           <DataTable.Header>
             <DataTable.Title>Gdz.</DataTable.Title>
-            <DataTable.Title style={{ flex: 2 }}>Pn. - Pt.</DataTable.Title>
-            <DataTable.Title>Soboty</DataTable.Title>
-            <DataTable.Title>Święta</DataTable.Title>
+            <DataTable.Title style={{ flex: 3 }}>Pn. - Pt.</DataTable.Title>
+            <DataTable.Title style={{ flex: 1.25 }}>Soboty</DataTable.Title>
+            <DataTable.Title style={{ flex: 1.25 }}>Święta</DataTable.Title>
           </DataTable.Header>
           <ScrollView nestedScrollEnabled>
             {departures != null &&
               departures?.map((item) => (
                 <DataTable.Row key={item.id}>
                   <DataTable.Cell>{item.hour}</DataTable.Cell>
-                  <DataTable.Cell style={{ flex: 2 }}>
+                  <DataTable.Cell style={{ flex: 3 }}>
                     {item.departure?.map(
                       (minute, index) =>
                         minute.dayOfWeek == 0 && (
@@ -92,7 +93,7 @@ const ScheduleScreen = ({ route, navigation }) => {
                         )
                     )}
                   </DataTable.Cell>
-                  <DataTable.Cell>
+                  <DataTable.Cell style={{ flex: 1.25 }}>
                     {item.departure?.map(
                       (minute, index) =>
                         minute.dayOfWeek == 1 && (
@@ -126,7 +127,7 @@ const ScheduleScreen = ({ route, navigation }) => {
                         )
                     )}
                   </DataTable.Cell>
-                  <DataTable.Cell>
+                  <DataTable.Cell style={{ flex: 1.25 }}>
                     {item.departure?.map(
                       (minute, index) =>
                         minute.dayOfWeek == 2 && (
