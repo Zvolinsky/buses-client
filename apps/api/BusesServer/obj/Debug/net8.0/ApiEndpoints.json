@@ -1,0 +1,512 @@
+[
+  {
+    "ContainingType": "BusesServer.Controllers.BusesController",
+    "Method": "AddBus",
+    "RelativePath": "api/Buses/add-bus",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "bus",
+        "Type": "BusesServer.DTOs.BusDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BusesServer.Controllers.BusesController",
+    "Method": "DeleteBus",
+    "RelativePath": "api/Buses/delete-bus/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BusesServer.Controllers.BusesController",
+    "Method": "GetAllBuses",
+    "RelativePath": "api/Buses/get-all-buses",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BusesServer.Controllers.BusesController",
+    "Method": "GetBusById",
+    "RelativePath": "api/Buses/get-bus-by-id/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BusesServer.Controllers.BusesController",
+    "Method": "UpdateBus",
+    "RelativePath": "api/Buses/update-bus/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "bus",
+        "Type": "BusesServer.DTOs.BusDTO",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BusesServer.Controllers.BusRouteDirectionsController",
+    "Method": "AddBusRouteDirection",
+    "RelativePath": "api/BusRouteDirections/add-bus-route-direction",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "busRouteDirection",
+        "Type": "BusesServer.DTOs.BusRouteDirectionDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BusesServer.Controllers.BusRouteDirectionsController",
+    "Method": "DeleteBusRouteDirection",
+    "RelativePath": "api/BusRouteDirections/delete-bus-route-direction/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BusesServer.Controllers.BusRouteDirectionsController",
+    "Method": "GetAllBusRouteDirections",
+    "RelativePath": "api/BusRouteDirections/get-all-bus-route-directions",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BusesServer.Controllers.BusRouteDirectionsController",
+    "Method": "GetBusRouteDirectionById",
+    "RelativePath": "api/BusRouteDirections/get-bus-route-direction-by-busid/{busId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "busId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BusesServer.Controllers.BusRouteDirectionsController",
+    "Method": "UpdateBusRouteDirection",
+    "RelativePath": "api/BusRouteDirections/update-bus-route-direction/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "busRouteDirection",
+        "Type": "BusesServer.DTOs.BusRouteDirectionDTO",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BusesServer.Controllers.BusRoutesController",
+    "Method": "AddBusRoute",
+    "RelativePath": "api/BusRoutes/add-bus-route",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "busRoute",
+        "Type": "BusesServer.DTOs.BusRouteDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BusesServer.Controllers.BusRoutesController",
+    "Method": "DeleteBusRoute",
+    "RelativePath": "api/BusRoutes/delete-bus-route/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BusesServer.Controllers.BusRoutesController",
+    "Method": "GetBusRouteById",
+    "RelativePath": "api/BusRoutes/get-bus-route-by-id/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BusesServer.Controllers.BusRoutesController",
+    "Method": "GetBusRoutes",
+    "RelativePath": "api/BusRoutes/get-bus-routes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BusesServer.Controllers.BusRoutesController",
+    "Method": "UpdateBusRoute",
+    "RelativePath": "api/BusRoutes/update-bus-route/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "busRoute",
+        "Type": "BusesServer.DTOs.BusRouteDTO",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BusesServer.Controllers.BusRouteStopsController",
+    "Method": "AddBusRouteStop",
+    "RelativePath": "api/BusRouteStops/add-bus-route-stop",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "busRouteStop",
+        "Type": "BusesServer.DTOs.BusRouteStopDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BusesServer.Controllers.BusRouteStopsController",
+    "Method": "DeleteBusRouteStop",
+    "RelativePath": "api/BusRouteStops/delete-bus-route-stop/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BusesServer.Controllers.BusRouteStopsController",
+    "Method": "GetBusRouteStops",
+    "RelativePath": "api/BusRouteStops/get-bus-route-stops",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "busRouteDirectionId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BusesServer.Controllers.BusRouteStopsController",
+    "Method": "UpdateBusRouteStop",
+    "RelativePath": "api/BusRouteStops/update-bus-route-stop/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "busRouteStop",
+        "Type": "BusesServer.DTOs.BusRouteStopDTO",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BusesServer.Controllers.BusStopsController",
+    "Method": "AddBusStop",
+    "RelativePath": "api/BusStops/add-bus-stop",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "busStop",
+        "Type": "BusesServer.DTOs.BusStopDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BusesServer.Controllers.BusStopsController",
+    "Method": "DeleteBusStop",
+    "RelativePath": "api/BusStops/delete-bus-stop/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BusesServer.Controllers.BusStopsController",
+    "Method": "GetAllBusStops",
+    "RelativePath": "api/BusStops/get-all-bus-stops",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BusesServer.Controllers.BusStopsController",
+    "Method": "GetBusStopById",
+    "RelativePath": "api/BusStops/get-bus-stop-by-id/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BusesServer.Controllers.BusStopsController",
+    "Method": "UpdateBusStop",
+    "RelativePath": "api/BusStops/update-bus-stop/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "busStop",
+        "Type": "BusesServer.DTOs.BusStopDTO",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BusesServer.Controllers.DeparturesController",
+    "Method": "AddDeparture",
+    "RelativePath": "api/Departures/add-departure",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "departure",
+        "Type": "BusesServer.DTOs.DepartureDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BusesServer.Controllers.DeparturesController",
+    "Method": "DeleteDeparture",
+    "RelativePath": "api/Departures/delete-departure/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BusesServer.Controllers.DeparturesController",
+    "Method": "GetDepartureById",
+    "RelativePath": "api/Departures/get-departure-by-id/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BusesServer.Controllers.DeparturesController",
+    "Method": "GetDepartures",
+    "RelativePath": "api/Departures/get-departures",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "busId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "busStopId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "busRouteId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "busRouteDirectionId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "hour",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "minute",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "busRoutes",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "busRouteDirections",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "busStops",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BusesServer.Controllers.DeparturesController",
+    "Method": "UpdateDeparture",
+    "RelativePath": "api/Departures/update-departure/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "departure",
+        "Type": "BusesServer.DTOs.DepartureDTO",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

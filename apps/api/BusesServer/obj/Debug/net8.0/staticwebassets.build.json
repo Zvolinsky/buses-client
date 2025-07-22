@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "uJba3pb1Gt73t9RR6WTi6BYo2kviNoUBtz4535dY25E=",
+  "Source": "BusesServer",
+  "BasePath": "_content/BusesServer",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

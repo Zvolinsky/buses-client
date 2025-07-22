@@ -1,0 +1,41 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Krzysztof\\Documents\\Dev\\pks-mobile\\apps\\api\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8C8D3F42-F8D2-4E74-AADB-024E2334FE9D}|BusesServer\\BusesServer.csproj|c:\\users\\krzysztof\\documents\\dev\\pks-mobile\\apps\\api\\busesserver\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{8C8D3F42-F8D2-4E74-AADB-024E2334FE9D}|BusesServer\\BusesServer.csproj|solutionrelative:busesserver\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 1005,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 142,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\Krzysztof\\Documents\\Dev\\pks-mobile\\apps\\api\\BusesServer\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "BusesServer\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\Krzysztof\\Documents\\Dev\\pks-mobile\\apps\\api\\BusesServer\\Properties\\launchSettings.json",
+              "RelativeToolTip": "BusesServer\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAmwBoAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-07-16T14:27:52.119Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
