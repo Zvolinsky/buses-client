@@ -1,29 +1,19 @@
-import { useState, useEffect, useContext } from "react";
-import api from "../../services/api";
-import Header from "../../components/Header";
-import { ThemeContext } from "../../Layout";
-//elements
-import { ScrollView, View } from "react-native";
-import { Card, Text, Avatar, IconButton, useTheme } from "react-native-paper";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { BusStopsScreenNameList } from "../BusStopsScreen";
+import { View, Text, ScrollView } from "react-native";
+import { Card } from "react-native-paper";
+import { useState, useEffect } from "react";
 import { Departure } from "../../types/databaseTypes";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import Header from "../../components/Header";
+import api from "../../services/api";
 
-type ScheduleScreenProps = NativeStackScreenProps<
-  BusStopsScreenNameList,
-  "ScheduleScreen"
->;
-
-const ScheduleScreen: React.FC<ScheduleScreenProps> = ({
-  route,
-  navigation,
-}) => {
-  const { theme } = useContext(ThemeContext);
+const BusStopSchedulePage = () => {
+  const router = useRouter();
   const hour = new Date().getHours();
   const minute = new Date().getMinutes();
-  const { busStopId, busStopName } = route.params;
+  const { busStopId, busStopName } = useLocalSearchParams();
   const [departures, setDepartures] = useState<Departure[] | null>(null);
-  function getDepartures(busStopId) {
+
+  useEffect(() => {
     fetch(
       `${api.getDepartures}?busStopId=${busStopId}&hour=${hour}&minute=${minute}&busRouteDirections=true`
     )
@@ -34,19 +24,15 @@ const ScheduleScreen: React.FC<ScheduleScreenProps> = ({
       .catch((error) => {
         console.error(error);
       });
-  }
-
-  useEffect(() => {
-    getDepartures(busStopId);
   }, []);
 
   return (
-    <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
+    <View style={{ flex: 1 }}>
       <Header
         title={busStopName}
         leftHeader={{
           icon: "arrow-left",
-          onPress: () => navigation.goBack(),
+          onPress: () => router.back(),
         }}
       />
       {departures && (
@@ -75,4 +61,4 @@ const ScheduleScreen: React.FC<ScheduleScreenProps> = ({
   );
 };
 
-export default ScheduleScreen;
+export default BusStopSchedulePage;

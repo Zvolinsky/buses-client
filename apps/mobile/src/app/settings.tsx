@@ -1,23 +1,15 @@
-import { View } from "react-native";
-import { Divider, Icon, IconButton, Text } from "react-native-paper";
-import React from "react";
-import { ThemeContext } from "../Layout";
+import { View, Text } from "react-native";
+import { IconButton, Divider } from "react-native-paper";
 import Header from "../components/Header";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootScreenNameList } from "../../App";
+import React from "react";
+import { router } from "expo-router";
 
-type SettingsScreenProps = NativeStackScreenProps<
-  RootScreenNameList,
-  "Settings"
->;
-
-const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
-  const { theme, setIsDarkMode } = React.useContext(ThemeContext);
+const SettingsPage = () => {
   const options = [
     {
       title: "Tryb",
-      icon: !theme.dark ? "weather-night" : "weather-sunny",
-      function: () => setIsDarkMode(!theme.dark),
+      icon: "weather-night",
+      function: () => {},
     },
     {
       title: "Powiadomienia",
@@ -30,13 +22,14 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
       function: () => {},
     },
   ];
+
   return (
-    <View style={{ backgroundColor: theme.colors.background, flex: 1 }}>
+    <View style={{ flex: 1 }}>
       <Header
         title="Ustawienia"
         leftHeader={{
           icon: "arrow-left",
-          onPress: () => navigation.goBack(),
+          onPress: () => router.back(),
         }}
       />
       {options.map((option, index) => (
@@ -65,4 +58,4 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
   );
 };
 
-export default SettingsScreen;
+export default SettingsPage;

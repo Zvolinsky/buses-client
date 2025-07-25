@@ -1,11 +1,12 @@
-import { View } from "react-native";
-import { IconButton, Text, TextInput } from "react-native-paper";
-import React, { useContext, useState } from "react";
-import { ThemeContext } from "../Layout";
-import Map from "../components/Map";
+import { View, Text } from "react-native";
+import { TextInput, IconButton } from "react-native-paper";
+import Map from "../../components/Map";
+import Header from "../../components/Header";
+import { useState } from "react";
+import { useRouter } from "expo-router";
 
-const SearchConnectionScreen = ({ navigation }) => {
-  const { theme } = useContext(ThemeContext);
+const SearchConnectionPage = () => {
+  const router = useRouter();
   const [pointA, setPointA] = useState(null);
   const [pointB, setPointB] = useState(null);
   const [settingPoint, setSettingPoint] = useState<string>("A");
@@ -26,7 +27,14 @@ const SearchConnectionScreen = ({ navigation }) => {
     point === settingPoint ? setMapShow((s) => !s) : setSettingPoint(point);
   };
   return (
-    <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
+    <View style={{ flex: 1 }}>
+      <Header
+        title="Wyszukaj połączenie"
+        leftHeader={{
+          icon: "arrow-left",
+          onPress: () => router.back(),
+        }}
+      />
       <View style={{ padding: 20 }}>
         <TextInput
           label="Z miejsca"
@@ -98,4 +106,4 @@ const SearchConnectionScreen = ({ navigation }) => {
   );
 };
 
-export default SearchConnectionScreen;
+export default SearchConnectionPage;

@@ -1,34 +1,29 @@
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { useState, useEffect, useContext } from "react";
-import { View, FlatList, StyleSheet } from "react-native";
+import { View, FlatList, ScrollView } from "react-native";
 import { Button, Divider, Text } from "react-native-paper";
 import { ThemeContext } from "../Layout";
 
 import api from "../services/api";
 import { BusRouteDirection, BusRouteStop } from "../types/databaseTypes";
-
-const Tab = createMaterialTopTabNavigator();
+import { useLocalSearchParams, useRouter } from "expo-router";
 
 type TabNavigatorProps = {
   data: BusRouteDirection[];
-  bus: { busId: number; busName: string };
 };
 
 type TableProps = {
-  navigation: any;
-  route: {
-    params: {
-      busRouteDirectionId: number;
-      busId: number;
-      busName: string;
-      direction: string;
-    };
+  data: {
+    busRouteDirectionId: number;
+    busId: number;
+    busName: string;
+    direction: string;
   };
 };
 
-export const Table: React.FC<TableProps> = ({ navigation, route }) => {
+export const Table: React.FC<TableProps> = ({ data }) => {
+  const router = useRouter();
   const { theme } = useContext(ThemeContext);
-  const { busRouteDirectionId, busId, busName, direction } = route.params;
+  const { busRouteDirectionId, busId, busName, direction } = data;
   const [busRouteStops, setBusRouteStops] = useState<BusRouteStop[] | null>(
     null
   );
@@ -46,6 +41,7 @@ export const Table: React.FC<TableProps> = ({ navigation, route }) => {
 
   return (
     <FlatList
+      nestedScrollEnabled
       data={busRouteStops}
       renderItem={({ item }) => (
         <View style={{ backgroundColor: theme.colors.background }}>
@@ -60,12 +56,15 @@ export const Table: React.FC<TableProps> = ({ navigation, route }) => {
               verticalAlign: "middle",
             }}
             onPress={() =>
-              navigation.navigate("ScheduleScreen", {
-                busId: busId,
-                busStopId: item.busStopId,
-                busName: busName,
-                busRouteDirectionId: busRouteDirectionId,
-                direction: direction,
+              router.push({
+                pathname: "/buses/schedule",
+                params: {
+                  busId: busId,
+                  busStopId: item.busStopId,
+                  busName: busName,
+                  busRouteDirectionId: busRouteDirectionId,
+                  direction: direction,
+                },
               })
             }
           >
@@ -78,44 +77,35 @@ export const Table: React.FC<TableProps> = ({ navigation, route }) => {
   );
 };
 
-const TabNavigator: React.FC<TabNavigatorProps> = ({ data, bus }) => {
-  const { theme } = useContext(ThemeContext);
+const TabNavigator: React.FC<TabNavigatorProps> = ({ data }) => {
+  const { busId, busName } = useLocalSearchParams();
   return (
-    <Tab.Navigator
-      screenOptions={{
-        tabBarStyle: {
-          backgroundColor: theme.colors.background,
-          borderColor: theme.colors.primaryContainer,
-          borderTopWidth: 3,
-        },
-        tabBarLabelStyle: {
-          color: theme.colors.onBackground,
-        },
-      }}
-    >
-      <Tab.Screen
-        name={`Do: ${data[0].name}`}
-        options={{ tabBarTestID: "first-tab-bar-item" }}
-        component={Table}
-        initialParams={{
+    <ScrollView>
+      <View>
+        <Text>{`Do: ${data[0].name}`}</Text>
+      </View>
+
+      <Table
+        data={{
           busRouteDirectionId: data[0].id,
-          busId: bus.busId,
-          busName: bus.busName,
+          busId: busId,
+          busName: busName,
           direction: data[0].name,
         }}
       />
-      <Tab.Screen
-        name={`Do: ${data[1].name}`}
-        options={{ tabBarTestID: "second-tab-bar-item" }}
-        component={Table}
-        initialParams={{
+      <View>
+        <Text>{`Do: ${data[1].name}`}</Text>
+      </View>
+
+      <Table
+        data={{
           busRouteDirectionId: data[1].id,
-          busId: bus.busId,
-          busName: bus.busName,
+          busId: busId,
+          busName: busName,
           direction: data[1].name,
         }}
       />
-    </Tab.Navigator>
+    </ScrollView>
   );
 };
 

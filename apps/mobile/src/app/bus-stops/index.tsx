@@ -1,22 +1,14 @@
-import { useEffect, useState, useContext } from "react";
-
-import api from "../../services/api";
-import { ThemeContext } from "../../Layout";
-//elements
-import { View, FlatList, ListRenderItem } from "react-native";
-import { Button, Searchbar } from "react-native-paper";
-import Header from "../../components/Header";
+import { View, Text, FlatList } from "react-native";
+import { Searchbar, Button } from "react-native-paper";
+import { ListRenderItem } from "react-native";
 import { BusStop } from "../../types/databaseTypes";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { BusStopsScreenNameList } from "../BusStopsScreen";
+import api from "../../services/api";
+import { useState, useEffect } from "react";
+import { useRouter } from "expo-router";
+import Header from "../../components/Header";
 
-type BusStopsListProps = NativeStackScreenProps<
-  BusStopsScreenNameList,
-  "BusStopsList"
->;
-
-const BusStopsList: React.FC<BusStopsListProps> = ({ navigation }) => {
-  const { theme } = useContext(ThemeContext);
+const BusStopsPage = () => {
+  const router = useRouter();
   const [busStops, setBusStops] = useState<BusStop[] | null>(null);
   const [searchQuery, setSearchQuery] = useState<string | null>("");
   const [filteredBusStops, setFilteredBusStops] = useState<BusStop[] | null>(
@@ -53,9 +45,9 @@ const BusStopsList: React.FC<BusStopsListProps> = ({ navigation }) => {
     return (
       <Button
         onPress={() => {
-          navigation.navigate("ScheduleScreen", {
-            busStopId: item.id,
-            busStopName: item.name,
+          router.push({
+            pathname: "/bus-stops/schedule",
+            params: { busStopId: item.id, busStopName: item.name },
           });
         }}
       >
@@ -65,12 +57,12 @@ const BusStopsList: React.FC<BusStopsListProps> = ({ navigation }) => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
+    <View style={{ flex: 1 }}>
       <Header
-        title="Wybierz przystanek"
+        title="Wybierz linię"
         leftHeader={{
           icon: "arrow-left",
-          onPress: () => navigation.goBack(),
+          onPress: () => router.back(),
         }}
       />
       <Searchbar
@@ -87,4 +79,4 @@ const BusStopsList: React.FC<BusStopsListProps> = ({ navigation }) => {
   );
 };
 
-export default BusStopsList;
+export default BusStopsPage;

@@ -1,18 +1,12 @@
-import { useState, useEffect, useContext } from "react";
-import { ScrollView, View, StyleSheet } from "react-native";
-import { Button, DataTable, Text } from "react-native-paper";
+import { View, Text, ScrollView } from "react-native";
+import React from "react";
+import { useState, useEffect } from "react";
 import routeInfo, { infoDescription } from "../../enums/routeInfo";
-import { groupByHours } from "../../utils/reduce";
-import api from "../../services/api";
 import Header from "../../components/Header";
-import { ThemeContext } from "../../Layout";
-import { BusesScreenNameList } from "../BusesScreen";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-
-type ScheduleScreenProps = NativeStackScreenProps<
-  BusesScreenNameList,
-  "ScheduleScreen"
->;
+import { Button, DataTable } from "react-native-paper";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import api from "../../services/api";
+import { groupByHours } from "../../utils/reduce";
 
 type GroupedDeparture = {
   id: number;
@@ -25,46 +19,24 @@ type GroupedDeparture = {
   }[];
 };
 
-const fetchDepartures = async (
-  busId: number,
-  busStopId: number,
-  busRouteDirectionId: number
-): Promise<GroupedDeparture[]> => {
-  const response = await fetch(
-    `${api.getDepartures}?busId=${busId}&busStopId=${busStopId}&busRouteDirectionId=${busRouteDirectionId}&busRoutes=true`
-  );
-  const json = await response.json();
-  const result = groupByHours(json);
-  if (!response.ok) {
-    throw new Error("Network response was not ok");
-  }
-  return result;
-};
-
-const ScheduleScreen: React.FC<ScheduleScreenProps> = ({
-  route,
-  navigation,
-}) => {
-  const { theme } = useContext(ThemeContext);
+const SchedulePage = () => {
   const { busId, busStopId, busName, busRouteDirectionId, direction } =
-    route.params;
+    useLocalSearchParams();
+  const router = useRouter();
   const [departures, setDepartures] = useState<GroupedDeparture[] | null>(null);
 
   useEffect(() => {
-    setDepartures(null);
-    const loadData = async () => {
-      try {
-        const data = await fetchDepartures(
-          busId,
-          busStopId,
-          busRouteDirectionId
-        );
-        setDepartures(data);
-      } catch (error) {
+    fetch(
+      `${api.getDepartures}?busId=${busId}&busStopId=${busStopId}&busRouteDirectionId=${busRouteDirectionId}&busRoutes=true`
+    )
+      .then((res) => res.json())
+      .then((json) => {
+        const result = groupByHours(json);
+        setDepartures(result);
+      })
+      .catch((error) => {
         console.error(error);
-      }
-    };
-    loadData();
+      });
   }, []);
 
   const renderDepartureButtons = (item: GroupedDeparture, dayOfWeek: number) =>
@@ -73,14 +45,16 @@ const ScheduleScreen: React.FC<ScheduleScreenProps> = ({
         time.dayOfWeek == dayOfWeek && (
           <Button
             key={index}
-            labelStyle={styles.timeButton}
             onPress={() =>
-              navigation.navigate("RouteScreen", {
-                busId: busId,
-                busStopId: busStopId,
-                busName: busName,
-                direction: direction,
-                busRouteId: time.busRouteId,
+              router.push({
+                pathname: "/buses/bus-route",
+                params: {
+                  busId: busId,
+                  busStopId: busStopId,
+                  busName: busName,
+                  direction: direction,
+                  busRouteId: time.busRouteId,
+                },
               })
             }
           >
@@ -95,17 +69,17 @@ const ScheduleScreen: React.FC<ScheduleScreenProps> = ({
     );
 
   return (
-    <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
+    <View style={{ flex: 1 }}>
       <Header
         title="Rozkład jazdy"
         leftHeader={{
           icon: "arrow-left",
-          onPress: () => navigation.goBack(),
+          onPress: () => router.back(),
         }}
       />
       <ScrollView>
         <View style={{ padding: 20, gap: 20 }}>
-          <Text variant="displayMedium">Linia {busName}</Text>
+          <Text>Linia {busName}</Text>
           <View>
             <Text style={{ fontSize: 18 }}>Kierunek:</Text>
             <Text style={{ fontSize: 22, width: "80%" }}>{direction}</Text>
@@ -115,21 +89,21 @@ const ScheduleScreen: React.FC<ScheduleScreenProps> = ({
         <DataTable style={{ height: 500 }}>
           <DataTable.Header>
             <DataTable.Title>Gdz.</DataTable.Title>
-            <DataTable.Title style={styles.weekday}>Pn. - Pt.</DataTable.Title>
-            <DataTable.Title style={styles.weekend}>Soboty</DataTable.Title>
-            <DataTable.Title style={styles.weekend}>Święta</DataTable.Title>
+            <DataTable.Title>Pn. - Pt.</DataTable.Title>
+            <DataTable.Title>Soboty</DataTable.Title>
+            <DataTable.Title>Święta</DataTable.Title>
           </DataTable.Header>
           <ScrollView nestedScrollEnabled>
             {departures?.map((item) => (
               <DataTable.Row key={item.id}>
                 <DataTable.Cell>{item.hour}</DataTable.Cell>
-                <DataTable.Cell style={styles.weekday}>
+                <DataTable.Cell>
                   {renderDepartureButtons(item, 0)}
                 </DataTable.Cell>
-                <DataTable.Cell style={styles.weekend}>
+                <DataTable.Cell>
                   {renderDepartureButtons(item, 1)}
                 </DataTable.Cell>
-                <DataTable.Cell style={styles.weekend}>
+                <DataTable.Cell>
                   {renderDepartureButtons(item, 2)}
                 </DataTable.Cell>
               </DataTable.Row>
@@ -153,21 +127,4 @@ const ScheduleScreen: React.FC<ScheduleScreenProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
-  weekday: {
-    flex: 3,
-  },
-  weekend: {
-    flex: 1.25,
-  },
-  timeButton: {
-    borderColor: "#96c",
-    padding: 4,
-    borderRadius: 10,
-    fontSize: 20,
-    height: 40,
-    verticalAlign: "middle",
-  },
-});
-
-export default ScheduleScreen;
+export default SchedulePage;
