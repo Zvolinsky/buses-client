@@ -1,8 +1,7 @@
-import { View } from "react-native";
+import { TouchableOpacity, View, Text } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import React, { useEffect } from "react";
 import { defaultLocationRzeszow } from "../constants/defaultCitiesCoords";
-import { Button, Text } from "react-native-paper";
 
 type MapProps = {
   setter: Boolean;
@@ -34,7 +33,17 @@ const Map: React.FC<MapProps> = ({ setter, point, setPoint, busStops }) => {
     }
   }, [point]);
   return (
-    <View style={{ flex: 1 }}>
+    <View className="flex-1 gap-3">
+      {setter && (
+        <TouchableOpacity
+          className="bg-primary p-3 items-center rounded-xl self-center w-1/2"
+          onPress={() => {
+            handleSetPoint(markerPos);
+          }}
+        >
+          <Text className="font-bold text-white dark:text-black">Ustaw</Text>
+        </TouchableOpacity>
+      )}
       <MapView
         style={{ width: "100%", height: setter ? "90%" : "100%" }}
         initialRegion={defaultLocationRzeszow}
@@ -59,16 +68,6 @@ const Map: React.FC<MapProps> = ({ setter, point, setPoint, busStops }) => {
             ></Marker>
           ))}
       </MapView>
-      {setter && (
-        <Button
-          mode="contained"
-          onPress={() => {
-            handleSetPoint(markerPos);
-          }}
-        >
-          <Text>Ustaw</Text>
-        </Button>
-      )}
     </View>
   );
 };

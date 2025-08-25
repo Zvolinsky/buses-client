@@ -1,15 +1,18 @@
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { IconButton, Divider } from "react-native-paper";
+import { useColorScheme } from "nativewind";
 import Header from "../components/Header";
 import React from "react";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { router } from "expo-router";
 
 const SettingsPage = () => {
+  const { colorScheme, toggleColorScheme } = useColorScheme();
   const options = [
     {
       title: "Tryb",
-      icon: "weather-night",
-      function: () => {},
+      icon: colorScheme === "dark" ? "weather-sunny" : "weather-night",
+      function: () => toggleColorScheme(),
     },
     {
       title: "Powiadomienia",
@@ -24,7 +27,7 @@ const SettingsPage = () => {
   ];
 
   return (
-    <View style={{ flex: 1 }}>
+    <View className="flex-1 bg-background">
       <Header
         title="Ustawienia"
         leftHeader={{
@@ -35,21 +38,17 @@ const SettingsPage = () => {
       {options.map((option, index) => (
         <View key={index}>
           <View
-            style={{
-              flexDirection: "row",
-              padding: 20,
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
+            className="flex-row p-7 items-center justify-between"
             key={index}
           >
-            <Text style={{ fontSize: 17 }}>{option.title}</Text>
-            <IconButton
-              testID="actual-icon-button"
-              icon={option.icon}
-              size={29}
-              onPress={option.function}
-            />
+            <Text className="text-xl text-text-primary">{option.title}</Text>
+            <TouchableOpacity onPress={option.function}>
+              <MaterialCommunityIcons
+                name={option.icon}
+                size={30}
+                className="text-primary"
+              />
+            </TouchableOpacity>
           </View>
           {index !== options.length - 1 && <Divider />}
         </View>

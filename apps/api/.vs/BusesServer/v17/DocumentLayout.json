@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Krzysztof\\Documents\\Dev\\pks-mobile\\apps\\api\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8C8D3F42-F8D2-4E74-AADB-024E2334FE9D}|BusesServer\\BusesServer.csproj|c:\\users\\krzysztof\\documents\\dev\\pks-mobile\\apps\\api\\busesserver\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{8C8D3F42-F8D2-4E74-AADB-024E2334FE9D}|BusesServer\\BusesServer.csproj|solutionrelative:busesserver\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{8C8D3F42-F8D2-4E74-AADB-024E2334FE9D}|BusesServer\\BusesServer.csproj|c:\\users\\krzysztof\\documents\\dev\\pks-mobile\\apps\\api\\busesserver\\data\\services\\departuresservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C8D3F42-F8D2-4E74-AADB-024E2334FE9D}|BusesServer\\BusesServer.csproj|solutionrelative:busesserver\\data\\services\\departuresservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C8D3F42-F8D2-4E74-AADB-024E2334FE9D}|BusesServer\\BusesServer.csproj|c:\\users\\krzysztof\\documents\\dev\\pks-mobile\\apps\\api\\busesserver\\controllers\\departurescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C8D3F42-F8D2-4E74-AADB-024E2334FE9D}|BusesServer\\BusesServer.csproj|solutionrelative:busesserver\\controllers\\departurescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,14 +27,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "C:\\Users\\Krzysztof\\Documents\\Dev\\pks-mobile\\apps\\api\\BusesServer\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "BusesServer\\Properties\\launchSettings.json",
-              "ToolTip": "C:\\Users\\Krzysztof\\Documents\\Dev\\pks-mobile\\apps\\api\\BusesServer\\Properties\\launchSettings.json",
-              "RelativeToolTip": "BusesServer\\Properties\\launchSettings.json",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAAwBoAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-07-16T14:27:52.119Z",
+              "Title": "DeparturesService.cs",
+              "DocumentMoniker": "C:\\Users\\Krzysztof\\Documents\\Dev\\pks-mobile\\apps\\api\\BusesServer\\Data\\Services\\DeparturesService.cs",
+              "RelativeDocumentMoniker": "BusesServer\\Data\\Services\\DeparturesService.cs",
+              "ToolTip": "C:\\Users\\Krzysztof\\Documents\\Dev\\pks-mobile\\apps\\api\\BusesServer\\Data\\Services\\DeparturesService.cs",
+              "RelativeToolTip": "BusesServer\\Data\\Services\\DeparturesService.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAYwD4AAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-21T12:18:25.498Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DeparturesController.cs",
+              "DocumentMoniker": "C:\\Users\\Krzysztof\\Documents\\Dev\\pks-mobile\\apps\\api\\BusesServer\\Controllers\\DeparturesController.cs",
+              "RelativeDocumentMoniker": "BusesServer\\Controllers\\DeparturesController.cs",
+              "ToolTip": "C:\\Users\\Krzysztof\\Documents\\Dev\\pks-mobile\\apps\\api\\BusesServer\\Controllers\\DeparturesController.cs",
+              "RelativeToolTip": "BusesServer\\Controllers\\DeparturesController.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAawBwAAACKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-21T12:16:57.469Z",
               "EditorCaption": ""
             }
           ]

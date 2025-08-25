@@ -1,4 +1,4 @@
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import { Searchbar, Button } from "react-native-paper";
 import { ListRenderItem } from "react-native";
 import { BusStop } from "../../types/databaseTypes";
@@ -43,7 +43,8 @@ const BusStopsPage = () => {
 
   const renderItem: ListRenderItem<BusStop> = ({ item }: { item: BusStop }) => {
     return (
-      <Button
+      <TouchableOpacity
+        className="p-4 bg-background"
         onPress={() => {
           router.push({
             pathname: "/bus-stops/schedule",
@@ -51,18 +52,22 @@ const BusStopsPage = () => {
           });
         }}
       >
-        {item.name}
-      </Button>
+        <Text className="text-text-primary">{item.name}</Text>
+      </TouchableOpacity>
     );
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View className="flex-1 bg-background gap-3">
       <Header
         title="Wybierz linię"
         leftHeader={{
           icon: "arrow-left",
           onPress: () => router.back(),
+        }}
+        rightHeader={{
+          icon: "cog",
+          onPress: () => router.push("settings"),
         }}
       />
       <Searchbar
@@ -74,6 +79,9 @@ const BusStopsPage = () => {
         data={filteredBusStops ? filteredBusStops : busStops}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
+        ItemSeparatorComponent={() => (
+          <View className="h-0.5 bg-gray-400">{""}</View>
+        )}
       />
     </View>
   );

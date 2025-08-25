@@ -1,4 +1,6 @@
-import { View, Text, Pressable, FlatList } from "react-native";
+import { View, Text, TouchableOpacity, FlatList } from "react-native";
+import { cssInterop } from "nativewind";
+import "./global.css";
 import React from "react";
 import Header from "../components/Header";
 import { ListRenderItem } from "react-native";
@@ -16,6 +18,13 @@ type CardProps = {
   route: RouteItem;
   router: any;
 };
+
+cssInterop(MaterialCommunityIcons, {
+  className: {
+    target: "style",
+    nativeStyleToProp: { height: true, width: true, size: true },
+  },
+});
 
 const routes: RouteItem[] = [
   {
@@ -65,7 +74,7 @@ const HomePage = () => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View className="flex-1 bg-background">
       <Header
         title="MKS Mobile"
         rightHeader={{
@@ -78,6 +87,7 @@ const HomePage = () => {
         renderItem={renderCard}
         keyExtractor={(item) => item.id.toString()}
         numColumns={2}
+        className="m-2"
       />
     </View>
   );
@@ -93,10 +103,17 @@ const Card: React.FC<CardProps> = ({ route, router }) => {
   };
 
   return (
-    <Pressable onPress={handlePress}>
-      <MaterialCommunityIcons name={route.iconName} size={50} />
-      <Text>{route.content}</Text>
-    </Pressable>
+    <TouchableOpacity
+      className="w-1/2 h-[200] justify-center items-center"
+      onPress={handlePress}
+    >
+      <MaterialCommunityIcons
+        name={route.iconName}
+        size={50}
+        className="text-primary"
+      />
+      <Text className="text-lg text-text-primary">{route.content}</Text>
+    </TouchableOpacity>
   );
 };
 

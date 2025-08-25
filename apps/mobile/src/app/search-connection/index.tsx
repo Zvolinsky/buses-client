@@ -27,15 +27,19 @@ const SearchConnectionPage = () => {
     point === settingPoint ? setMapShow((s) => !s) : setSettingPoint(point);
   };
   return (
-    <View style={{ flex: 1 }}>
+    <View className="flex-1 bg-background">
       <Header
         title="Wyszukaj połączenie"
         leftHeader={{
           icon: "arrow-left",
           onPress: () => router.back(),
         }}
+        rightHeader={{
+          icon: "cog",
+          onPress: () => router.push("settings"),
+        }}
       />
-      <View style={{ padding: 20 }}>
+      <View className="p-7">
         <TextInput
           label="Z miejsca"
           value={

@@ -22,12 +22,16 @@ const MapPage = () => {
   }, []);
 
   return (
-    <View style={{ flex: 1 }}>
+    <View className="flex-1 bg-background">
       <Header
         title="Wyszukaj połączenie"
         leftHeader={{
           icon: "arrow-left",
           onPress: () => router.back(),
+        }}
+        rightHeader={{
+          icon: "cog",
+          onPress: () => router.push("settings"),
         }}
       />
       <Map setter={false} busStops={busStops} />

@@ -26,7 +26,7 @@ namespace BusesServer.Controllers
 
 
         [HttpGet("get-departures")]
-        public IActionResult GetDepartures(int busId, int busStopId, int busRouteId, int busRouteDirectionId, int hour, int minute, bool busRoutes, bool busRouteDirections, bool busStops)
+        public IActionResult GetDepartures(int busId, int busStopId, int busRouteId, int busRouteDirectionId, int? hour, int? minute, bool busRoutes, bool busRouteDirections, bool busStops)
         {
             var departure = _departuresService.GetDepartures(busId, busStopId, busRouteId, busRouteDirectionId, hour, minute, busRoutes, busRouteDirections, busStops);
             return Ok(departure);

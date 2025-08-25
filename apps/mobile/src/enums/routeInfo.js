@@ -11,15 +11,29 @@ export default routeInfo = {
   9: "m",
 };
 
-export const infoDescription = {
-  Z: "kurs przez Zalesie",
-  plus: "kursuje w dni wolne od pracy (niedziele i święta)",
-  dwapięć: "kursuje od wtorku do piątku",
-  sześćś: "kursuje w soboty (nie kursuje w święta ustawowo wolne)",
-  D: "kursuje od poniedziałku do piątku oprócz świąt",
-  S: "kursuje w dni nauki szkolnej",
-  b: "nie kursuje w dniu 1.I, w pierwszy dzień Świąt Wielkanocnych i w dniu 25 XII",
-  g: "nie kursuje w dniu 24.XII",
-  m: "nie kursuje w dniach 24 i 31.XII",
-  e: "nie kursuje w okresie ferii letnich",
-};
+export const infoDescription = [
+  { key: "0", description: "kurs przez Zalesie" },
+  {
+    key: "+",
+    description: "kursuje w dni wolne od pracy (niedziele i święta)",
+  },
+  { key: "2-5", description: "kursuje od wtorku do piątku" },
+  {
+    key: "6ś",
+    description: "kursuje w soboty (nie kursuje w święta ustawowo wolne)",
+  },
+  { key: "D", description: "kursuje od poniedziałku do piątku oprócz świąt" },
+  { key: "S", description: "kursuje w dni nauki szkolnej" },
+  {
+    key: "_MP",
+    description: "kursuje tylko na trasie Mińsk Mazowiecki - Warszawa",
+  },
+  {
+    key: "b",
+    description:
+      "nie kursuje w dniu 1.I, w pierwszy dzień Świąt Wielkanocnych i w dniu 25 XII",
+  },
+  { key: "e", description: "nie kursuje w okresie ferii letnich" },
+  { key: "g", description: "nie kursuje w dniu 24.XII" },
+  { key: "m", description: "nie kursuje w dniach 24 i 31.XII" },
+];

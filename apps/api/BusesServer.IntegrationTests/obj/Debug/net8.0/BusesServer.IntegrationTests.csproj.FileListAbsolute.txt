@@ -928,3 +928,4 @@ C:\Users\Krzysztof\Documents\Dev\pks-mobile\apps\api\BusesServer.IntegrationTest
 C:\Users\Krzysztof\Documents\Dev\pks-mobile\apps\api\BusesServer.IntegrationTests\obj\Debug\net8.0\BusesServer.IntegrationTests.pdb
 C:\Users\Krzysztof\Documents\Dev\pks-mobile\apps\api\BusesServer.IntegrationTests\obj\Debug\net8.0\BusesServer.IntegrationTests.genruntimeconfig.cache
 C:\Users\Krzysztof\Documents\Dev\pks-mobile\apps\api\BusesServer.IntegrationTests\obj\Debug\net8.0\ref\BusesServer.IntegrationTests.dll
+C:\Users\Krzysztof\Documents\Dev\pks-mobile\apps\api\BusesServer.IntegrationTests\obj\Debug\net8.0\BusesServer.IntegrationTests.sourcelink.json

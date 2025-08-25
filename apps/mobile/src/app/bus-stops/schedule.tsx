@@ -1,4 +1,4 @@
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { Card } from "react-native-paper";
 import { useState, useEffect } from "react";
 import { Departure } from "../../types/databaseTypes";
@@ -27,36 +27,51 @@ const BusStopSchedulePage = () => {
   }, []);
 
   return (
-    <View style={{ flex: 1 }}>
+    <View className="flex-1 bg-background">
       <Header
-        title={busStopName}
+        title={`${busStopName}`}
         leftHeader={{
           icon: "arrow-left",
           onPress: () => router.back(),
         }}
+        rightHeader={{
+          icon: "cog",
+          onPress: () => router.push("settings"),
+        }}
       />
-      {departures && (
-        <ScrollView>
-          {departures.map((item) => (
-            <Card key={item.id} onPress={() => {}}>
-              <Card.Title
-                style={{ padding: 13 }}
-                title={item.bus.number}
-                titleVariant="displaySmall"
-                subtitle={item.busRoute.busRouteDirection.name}
-                subtitleVariant="titleMedium"
-                right={() => (
-                  <Text style={{ fontSize: 20 }}>
+      {departures &&
+        (departures.length === 0 ? (
+          <View className="flex-1 items-center justify-center">
+            <Text className="text-text-primary text-lg">
+              Brak odjazdów w najbliższym czasie
+            </Text>
+          </View>
+        ) : (
+          <ScrollView>
+            {departures.map((item) => (
+              <TouchableOpacity
+                key={item.id}
+                className="border border-gray-400 rounded-lg bg-background flex-row justify-between p-5"
+                onPress={() => {}}
+              >
+                <View className="gap-4">
+                  <Text className="text-text-primary font-semibold text-3xl">
+                    {item.bus.number}
+                  </Text>
+                  <Text className="text-text-primary text-lg">
+                    {item.busRoute.busRouteDirection.name}
+                  </Text>
+                </View>
+                <View>
+                  <Text className="text-text-primary font-black text-lg">
                     {String(item.hour).padStart(2, "0")}:
                     {String(item.minute).padStart(2, "0")}
                   </Text>
-                )}
-              />
-              <Card.Content>{""}</Card.Content>
-            </Card>
-          ))}
-        </ScrollView>
-      )}
+                </View>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        ))}
     </View>
   );
 };

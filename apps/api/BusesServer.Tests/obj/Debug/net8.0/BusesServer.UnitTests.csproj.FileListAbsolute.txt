@@ -388,3 +388,4 @@ C:\Users\Krzysztof\Documents\Dev\pks-mobile\apps\api\BusesServer.Tests\obj\Debug
 C:\Users\Krzysztof\Documents\Dev\pks-mobile\apps\api\BusesServer.Tests\obj\Debug\net8.0\BusesServer.UnitTests.pdb
 C:\Users\Krzysztof\Documents\Dev\pks-mobile\apps\api\BusesServer.Tests\obj\Debug\net8.0\BusesServer.UnitTests.genruntimeconfig.cache
 C:\Users\Krzysztof\Documents\Dev\pks-mobile\apps\api\BusesServer.Tests\obj\Debug\net8.0\ref\BusesServer.UnitTests.dll
+C:\Users\Krzysztof\Documents\Dev\pks-mobile\apps\api\BusesServer.Tests\obj\Debug\net8.0\BusesServer.UnitTests.sourcelink.json

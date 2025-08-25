@@ -1,10 +1,15 @@
-import { View, Text, ListRenderItem, Pressable, FlatList } from "react-native";
-import React, { useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  ListRenderItem,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
+import { useEffect, useState } from "react";
 import { Bus } from "../../types/databaseTypes";
 import api from "../../services/api";
 import { useRouter } from "expo-router";
 import Header from "../../components/Header";
-import { mockBuses } from "../../mocks/buses";
 
 const BusesPage = () => {
   const [buses, setBuses] = useState<Bus[] | null>(null);
@@ -20,35 +25,40 @@ const BusesPage = () => {
       });
   }, []);
   const renderItem: ListRenderItem<Bus> = ({ item }) => (
-    <Pressable
-      key={item.id}
-      style={{ height: 40 }}
-      onPress={() =>
-        router.push({
-          pathname: "/buses/bus-route-stops",
-          params: { busId: item.id, busName: item.number },
-        })
-      }
-    >
-      <Text>{item.number}</Text>
-    </Pressable>
+    <View className="w-1/4 ">
+      <TouchableOpacity
+        key={item.id}
+        className="h-11 w-5/6  bg-primary items-center justify-center self-center rounded-md"
+        onPress={() =>
+          router.push({
+            pathname: "/buses/bus-route-stops",
+            params: { busId: item.id, busName: item.number },
+          })
+        }
+      >
+        <Text className="text-lg font-semibold text-white dark:text-black">
+          {item.number}
+        </Text>
+      </TouchableOpacity>
+    </View>
   );
   return (
-    <View style={{ flex: 1 }}>
+    <View className="flex-1 bg-background">
       <Header
         title="Wybierz linię"
         leftHeader={{
           icon: "arrow-left",
           onPress: () => router.back(),
         }}
+        rightHeader={{
+          icon: "cog",
+          onPress: () => router.push("settings"),
+        }}
       />
       <FlatList
-        style={{
-          padding: 20,
-        }}
-        columnWrapperStyle={{ justifyContent: "space-between" }}
+        className="p-3"
+        ItemSeparatorComponent={() => <View className="h-5">{""}</View>}
         data={buses}
-        ItemSeparatorComponent={() => <View style={{ height: 30 }}></View>}
         renderItem={renderItem}
         horizontal={false}
         numColumns={4}

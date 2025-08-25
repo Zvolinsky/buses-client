@@ -54,7 +54,7 @@ namespace BusesServer.Data.Services
                 var routeData = _context.BusRoutes.ToList();
                 departures = departures.Where(n => n.BusRoute.BusRouteDirectionId == busRouteDirectionId).ToList();
             }
-            if (int.IsPositive((int)hour) && int.IsPositive((int)minute))
+            if (hour != null && minute != null)
             {
                 var routeData = _context.BusRoutes.ToList();
 
@@ -93,7 +93,7 @@ namespace BusesServer.Data.Services
                     earlierHours = earlierHours.Where(n => n.Hour < hour && n.BusRoute.DayOfWeek == Enums.DayOfWeek.Pnpt).OrderBy(x => x.Hour).ThenBy(x => x.Minute).ToList();
                     sameHourButEarlier = sameHourButEarlier.Where(n => n.Hour == hour && n.Minute < minute && n.BusRoute.DayOfWeek == Enums.DayOfWeek.Pnpt).OrderBy(x => x.Minute).ToList();
                 };
-                
+
 
                 departures = sameHour.Concat(laterHours).
                     Concat(earlierHours).

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BusesServer.IntegrationTests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2171f813f3753ffaf9461ecbfd306a0facb4810d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+68d773b076faf6f349249c65b79933aa0b0ed789")]
 [assembly: System.Reflection.AssemblyProductAttribute("BusesServer.IntegrationTests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BusesServer.IntegrationTests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

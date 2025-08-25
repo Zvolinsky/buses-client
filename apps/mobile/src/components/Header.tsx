@@ -1,7 +1,6 @@
-import { View } from "react-native";
-import React, { useContext } from "react";
-import { IconButton, Text } from "react-native-paper";
-import { ThemeContext } from "../Layout";
+import { TouchableOpacity, Text, View } from "react-native";
+import { cssInterop } from "nativewind";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 type HeaderProps = {
   title: string;
@@ -15,35 +14,38 @@ type HeaderProps = {
   };
 };
 
+cssInterop(MaterialCommunityIcons, {
+  className: {
+    target: "style",
+    nativeStyleToProp: { height: true, width: true, size: true },
+  },
+});
+
 const Header = ({ title, leftHeader, rightHeader }: HeaderProps) => {
-  const { theme } = useContext(ThemeContext);
+  //TODO: Dodać obsługę zbyt długiego tytułu
   return (
-    <View
-      style={{
-        backgroundColor: theme.colors.background,
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        padding: 10,
-      }}
-    >
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
+    <View className="flex-row justify-between items-center p-5">
+      <View className="flex-row items-center ">
         {leftHeader && (
-          <IconButton
-            icon={leftHeader.icon}
-            size={25}
-            onPress={() => leftHeader.onPress()}
-          />
+          <TouchableOpacity onPress={() => leftHeader.onPress()}>
+            <MaterialCommunityIcons
+              name={leftHeader.icon}
+              size={30}
+              className="text-secondary"
+            />
+          </TouchableOpacity>
         )}
-        <Text style={{ fontSize: 20, left: 10 }}>{title}</Text>
+        <Text className="text-2xl left-10 text-text-primary">{title}</Text>
       </View>
 
       {rightHeader && (
-        <IconButton
-          icon={rightHeader.icon}
-          size={25}
-          onPress={() => rightHeader.onPress()}
-        />
+        <TouchableOpacity onPress={() => rightHeader.onPress()}>
+          <MaterialCommunityIcons
+            name={rightHeader.icon}
+            size={30}
+            className="text-secondary"
+          />
+        </TouchableOpacity>
       )}
     </View>
   );
