@@ -2,29 +2,23 @@ import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import { Searchbar, Button } from "react-native-paper";
 import { ListRenderItem } from "react-native";
 import { BusStop } from "../../types/databaseTypes";
-import api from "../../services/api";
+import { fetchBusStops } from "../../services/api";
 import { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
 import Header from "../../components/Header";
+import { useQuery } from "@tanstack/react-query";
 
 const BusStopsPage = () => {
   const router = useRouter();
-  const [busStops, setBusStops] = useState<BusStop[] | null>(null);
   const [searchQuery, setSearchQuery] = useState<string | null>("");
   const [filteredBusStops, setFilteredBusStops] = useState<BusStop[] | null>(
     null
   );
 
-  useEffect(() => {
-    fetch(api.getAllBusStops)
-      .then((response) => response.json())
-      .then((json) => {
-        setBusStops(json);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  const { data: busStops, isLoading } = useQuery({
+    queryFn: () => fetchBusStops(),
+    queryKey: ["busStops"],
+  });
 
   useEffect(() => {
     if (searchQuery.trim() === "") {
@@ -56,6 +50,14 @@ const BusStopsPage = () => {
       </TouchableOpacity>
     );
   };
+
+  if (isLoading) {
+    return (
+      <View className="flex-1 items-center justify-center bg-background">
+        <Text className="text-lg font-semibold text-primary">Ładowanie...</Text>
+      </View>
+    );
+  }
 
   return (
     <View className="flex-1 bg-background gap-3">

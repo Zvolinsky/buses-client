@@ -2,45 +2,26 @@ import {
   View,
   Text,
   TouchableOpacity,
-  StyleSheet,
-  LayoutChangeEvent,
   FlatList,
   ListRenderItem,
 } from "react-native";
-import { cssInterop } from "nativewind";
-import React, { createContext, useState, useEffect } from "react";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { useState } from "react";
 import Animated from "react-native-reanimated";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { BusRouteStop } from "../types/databaseTypes";
-import api from "../services/api";
-
-cssInterop(MaterialCommunityIcons, {
-  className: {
-    target: "style",
-    nativeStyleToProp: { height: true, width: true, size: true },
-  },
-});
+import { useQuery } from "@tanstack/react-query";
+import { fetchBusRouteStops } from "../services/api";
 
 const Accordion = ({ data }) => {
   const router = useRouter();
   const { busId, busName } = useLocalSearchParams();
   const { busRouteDirectionId, direction } = data;
   const [isOpened, setIsOpened] = useState<boolean>(false);
-  const [busRouteStops, setBusRouteStops] = useState<BusRouteStop[] | null>(
-    null
-  );
 
-  useEffect(() => {
-    fetch(`${api.getBusRouteStops}${busRouteDirectionId}`)
-      .then((response) => response.json())
-      .then((json) => {
-        setBusRouteStops(json);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  const { data: busRouteStops } = useQuery({
+    queryFn: () => fetchBusRouteStops(busRouteDirectionId as unknown as number),
+    queryKey: ["busRouteStops", busRouteDirectionId],
+  });
 
   const handlePress = (): void => {
     setIsOpened((s) => !s);

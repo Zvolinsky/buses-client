@@ -5,29 +5,21 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
-import { useState, useEffect } from "react";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { Departure } from "../../types/databaseTypes";
-import api from "../../services/api";
+import { fetchBusRoute } from "../../services/api";
 import { ListRenderItem } from "react-native";
 import Header from "../../components/Header";
+import { useQuery } from "@tanstack/react-query";
 
 const BusRoutePage = () => {
   const router = useRouter();
   const { busRouteId, busName, direction } = useLocalSearchParams();
-  const [busRoute, setBusRoute] = useState<Departure[] | null>(null);
 
-  useEffect(() => {
-    fetch(`${api.getDeparturesByBusRouteId}${busRouteId}&busStops=true`)
-      .then((res) => res.json())
-      .then((json) => {
-        setBusRoute(json);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  const { data: busRoute, isLoading } = useQuery({
+    queryFn: () => fetchBusRoute(busRouteId as unknown as number),
+    queryKey: ["busRoute"],
+  });
 
   const renderItem: ListRenderItem<Departure> = ({
     item,
@@ -51,6 +43,13 @@ const BusRoutePage = () => {
       </>
     );
   };
+  if (isLoading) {
+    return (
+      <View className="flex-1 items-center justify-center bg-background">
+        <Text className="text-lg font-semibold text-primary">Ładowanie...</Text>
+      </View>
+    );
+  }
 
   return (
     <View className="bg-background flex-1">

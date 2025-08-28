@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import { ListRenderItem } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { Href, useRouter } from "expo-router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 type RouteItem = {
   id: number;

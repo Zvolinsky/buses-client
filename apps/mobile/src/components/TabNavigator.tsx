@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   View,
   FlatList,
@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import { DataTable, Divider } from "react-native-paper";
 import routeInfo, { infoDescription } from "../enums/routeInfo";
-import api from "../services/api";
 import { BusRouteStop } from "../types/databaseTypes";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { TabView } from "react-native-tab-view";
@@ -96,6 +95,7 @@ export const Tab = ({ route }) => {
 };
 
 const TabNavigator: React.FC<TabNavigatorProps> = ({ data }) => {
+  console.log(data[0][0]);
   const [index, setIndex] = useState<number>(0);
 
   const [routes] = useState([

@@ -1,31 +1,37 @@
 import { View, Text, ScrollView, TouchableOpacity } from "react-native";
-import { Card } from "react-native-paper";
-import { useState, useEffect } from "react";
-import { Departure } from "../../types/databaseTypes";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import Header from "../../components/Header";
-import api from "../../services/api";
+import { useQuery } from "@tanstack/react-query";
+import { fetchDepartures } from "../../services/api";
 
 const BusStopSchedulePage = () => {
+  const busRouteDirections = true;
   const router = useRouter();
   const hour = new Date().getHours();
   const minute = new Date().getMinutes();
   const { busStopId, busStopName } = useLocalSearchParams();
-  const [departures, setDepartures] = useState<Departure[] | null>(null);
 
-  useEffect(() => {
-    fetch(
-      `${api.getDepartures}?busStopId=${busStopId}&hour=${hour}&minute=${minute}&busRouteDirections=true`
-    )
-      .then((response) => response.json())
-      .then((json) => {
-        setDepartures(json);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  const { data: departures, isLoading } = useQuery({
+    queryFn: () =>
+      fetchDepartures(
+        undefined,
+        busStopId as unknown as number,
+        undefined,
+        undefined,
+        hour as unknown as number,
+        minute as unknown as number,
+        busRouteDirections as unknown as boolean
+      ),
+    queryKey: ["departures", busStopId],
+  });
 
+  if (isLoading) {
+    return (
+      <View className="flex-1 items-center justify-center bg-background">
+        <Text className="text-text-primary text-lg">Ładowanie...</Text>
+      </View>
+    );
+  }
   return (
     <View className="flex-1 bg-background">
       <Header

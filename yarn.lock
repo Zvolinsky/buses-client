@@ -2007,6 +2007,18 @@
   dependencies:
     "@sinonjs/commons" "^3.0.0"
 
+"@tanstack/query-core@5.85.5":
+  version "5.85.5"
+  resolved "https://registry.npmjs.org/@tanstack/query-core/-/query-core-5.85.5.tgz"
+  integrity sha512-KO0WTob4JEApv69iYp1eGvfMSUkgw//IpMnq+//cORBzXf0smyRwPLrUvEe5qtAEGjwZTXrjxg+oJNP/C00t6w==
+
+"@tanstack/react-query@^5.85.5":
+  version "5.85.5"
+  resolved "https://registry.npmjs.org/@tanstack/react-query/-/react-query-5.85.5.tgz"
+  integrity sha512-/X4EFNcnPiSs8wM2v+b6DqS5mmGeuJQvxBglmDxl6ZQb5V26ouD2SJYAcC3VjbNwqhY2zjxVD15rDA5nGbMn3A==
+  dependencies:
+    "@tanstack/query-core" "5.85.5"
+
 "@testing-library/jest-dom@^6.6.3":
   version "6.6.3"
   resolved "https://registry.npmjs.org/@testing-library/jest-dom/-/jest-dom-6.6.3.tgz"

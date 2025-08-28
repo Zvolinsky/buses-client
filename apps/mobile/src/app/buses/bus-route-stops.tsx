@@ -1,27 +1,26 @@
 import { View, Text, ScrollView } from "react-native";
-import { useState, useEffect } from "react";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import api from "../../services/api";
+import { fetchBusRouteDirections } from "../../services/api";
 import Header from "../../components/Header";
-import { BusRouteDirection } from "../../types/databaseTypes";
 import Accordion from "../../components/Accordion";
+import { useQuery } from "@tanstack/react-query";
 
 const BusRoutesPage = () => {
   const router = useRouter();
   const { busId, busName } = useLocalSearchParams();
-  const [busRouteDirections, setBusRouteDirections] = useState<
-    BusRouteDirection[] | null
-  >(null);
-  useEffect(() => {
-    fetch(`${api.getBusRouteDirectionByBusId}${busId}`)
-      .then((res) => res.json())
-      .then((json) => {
-        setBusRouteDirections(json);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  const { data: busRouteDirections, isLoading } = useQuery({
+    queryFn: () => fetchBusRouteDirections(busId as unknown as number),
+    queryKey: ["busRouteDirections", busId],
+  });
+
+  if (isLoading) {
+    return (
+      <View className="flex-1 items-center justify-center bg-background">
+        <Text className="text-lg font-semibold text-primary">Ładowanie...</Text>
+      </View>
+    );
+  }
+
   return (
     <View className="bg-background flex-1">
       <Header

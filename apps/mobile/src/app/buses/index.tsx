@@ -5,25 +5,20 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import { useEffect, useState } from "react";
 import { Bus } from "../../types/databaseTypes";
-import api from "../../services/api";
+import { fetchBuses } from "../../services/api";
 import { useRouter } from "expo-router";
 import Header from "../../components/Header";
+import { useQuery } from "@tanstack/react-query";
 
 const BusesPage = () => {
-  const [buses, setBuses] = useState<Bus[] | null>(null);
   const router = useRouter();
-  useEffect(() => {
-    fetch(api.getAllBuses)
-      .then((res) => res.json())
-      .then((json) => {
-        setBuses(json);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+
+  const { data: buses, isLoading } = useQuery({
+    queryFn: () => fetchBuses(),
+    queryKey: ["buses"],
+  });
+
   const renderItem: ListRenderItem<Bus> = ({ item }) => (
     <View className="w-1/4 ">
       <TouchableOpacity
@@ -42,6 +37,15 @@ const BusesPage = () => {
       </TouchableOpacity>
     </View>
   );
+
+  if (isLoading) {
+    return (
+      <View className="flex-1 items-center justify-center bg-background">
+        <Text className="text-lg font-semibold text-primary">Ładowanie...</Text>
+      </View>
+    );
+  }
+
   return (
     <View className="flex-1 bg-background">
       <Header

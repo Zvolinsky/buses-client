@@ -1,25 +1,26 @@
 import { View, Text } from "react-native";
-import { useState, useEffect } from "react";
-import api from "../../services/api";
+import { fetchBusStops } from "../../services/api";
 import Header from "../../components/Header";
 import { BusStop } from "../../types/databaseTypes";
 import { useRouter } from "expo-router";
 import Map from "../../components/Map";
+import { useQuery } from "@tanstack/react-query";
 
 const MapPage = () => {
   const router = useRouter();
-  const [busStops, setBusStops] = useState<BusStop[] | null>(null);
 
-  useEffect(() => {
-    fetch(api.getAllBusStops)
-      .then((response) => response.json())
-      .then((json) => {
-        setBusStops(json);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  const { data: busStops, isLoading } = useQuery({
+    queryFn: () => fetchBusStops(),
+    queryKey: ["busStops"],
+  });
+
+  if (isLoading) {
+    return (
+      <View className="flex-1 items-center justify-center bg-background">
+        <Text className="text-lg font-semibold text-primary">Ładowanie...</Text>
+      </View>
+    );
+  }
 
   return (
     <View className="flex-1 bg-background">

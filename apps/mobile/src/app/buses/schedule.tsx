@@ -1,10 +1,10 @@
 import { View, Text } from "react-native";
-import { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import api from "../../services/api";
-import { groupByDayOfWeek, groupByHours } from "../../utils/reduce";
+import { fetchDepartures } from "../../services/api";
 import TabNavigator from "../../components/TabNavigator";
+import { useQuery } from "@tanstack/react-query";
+import { groupByDayOfWeek, groupByHours } from "../../utils/reduce";
 
 export type GroupedDeparture = {
   id: number;
@@ -17,6 +17,7 @@ export type GroupedDeparture = {
 };
 
 const SchedulePage = () => {
+  const busRoutes = true;
   const {
     busId,
     busStopId,
@@ -26,21 +27,29 @@ const SchedulePage = () => {
     direction,
   } = useLocalSearchParams();
   const router = useRouter();
-  const [departures, setDepartures] = useState<GroupedDeparture[] | null>(null);
-  useEffect(() => {
-    fetch(
-      `${api.getDepartures}?busId=${busId}&busStopId=${busStopId}&busRouteDirectionId=${busRouteDirectionId}&busRoutes=true`
-    )
-      .then((res) => res.json())
-      .then((json) => {
-        const groupedByHours = groupByHours(json);
-        const result = groupByDayOfWeek(groupedByHours);
-        setDepartures(result);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+
+  const { data: departures, isLoading } = useQuery({
+    queryFn: async () => {
+      const data = await fetchDepartures(
+        busId as unknown as number,
+        busStopId as unknown as number,
+        busRouteDirectionId as unknown as number,
+        busRoutes as unknown as boolean
+      );
+      const groupedByHours = groupByHours(data);
+      const result = groupByDayOfWeek(groupedByHours);
+      return result;
+    },
+    queryKey: ["departures", busStopId],
+  });
+
+  if (isLoading) {
+    return (
+      <View className="flex-1 items-center justify-center bg-background">
+        <Text className="text-lg font-semibold text-primary">Ładowanie...</Text>
+      </View>
+    );
+  }
 
   return (
     <View className="bg-background flex-1" pointerEvents="auto">
