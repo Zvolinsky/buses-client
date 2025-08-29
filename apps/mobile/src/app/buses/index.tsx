@@ -8,7 +8,6 @@ import {
 import { Bus } from "../../types/databaseTypes";
 import { fetchBuses } from "../../services/api";
 import { useRouter } from "expo-router";
-import Header from "../../components/Header";
 import { useQuery } from "@tanstack/react-query";
 
 const BusesPage = () => {
@@ -48,17 +47,6 @@ const BusesPage = () => {
 
   return (
     <View className="flex-1 bg-background">
-      <Header
-        title="Wybierz linię"
-        leftHeader={{
-          icon: "arrow-left",
-          onPress: () => router.back(),
-        }}
-        rightHeader={{
-          icon: "cog",
-          onPress: () => router.push("settings"),
-        }}
-      />
       <FlatList
         className="p-3"
         ItemSeparatorComponent={() => <View className="h-5">{""}</View>}

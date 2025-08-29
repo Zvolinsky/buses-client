@@ -5,7 +5,6 @@ import { BusStop } from "../../types/databaseTypes";
 import { fetchBusStops } from "../../services/api";
 import { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
-import Header from "../../components/Header";
 import { useQuery } from "@tanstack/react-query";
 
 const BusStopsPage = () => {
@@ -14,7 +13,6 @@ const BusStopsPage = () => {
   const [filteredBusStops, setFilteredBusStops] = useState<BusStop[] | null>(
     null
   );
-
   const { data: busStops, isLoading } = useQuery({
     queryFn: () => fetchBusStops(),
     queryKey: ["busStops"],
@@ -61,17 +59,6 @@ const BusStopsPage = () => {
 
   return (
     <View className="flex-1 bg-background gap-3">
-      <Header
-        title="Wybierz linię"
-        leftHeader={{
-          icon: "arrow-left",
-          onPress: () => router.back(),
-        }}
-        rightHeader={{
-          icon: "cog",
-          onPress: () => router.push("settings"),
-        }}
-      />
       <Searchbar
         placeholder="Wyszukaj przystanek..."
         onChangeText={setSearchQuery}

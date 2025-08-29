@@ -90,7 +90,6 @@ export const fetchDepartures = async (...args): Promise<Departure[]> => {
   const url = `${endpoints.getDepartures}${
     queryString ? `?${queryString}` : ""
   }`;
-  console.log(url);
   const response = await fetch(url);
   const result = await response.json();
   if (!response.ok) {

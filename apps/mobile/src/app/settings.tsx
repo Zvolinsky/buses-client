@@ -1,10 +1,9 @@
 import { View, Text, TouchableOpacity } from "react-native";
-import { IconButton, Divider } from "react-native-paper";
+import { Divider } from "react-native-paper";
 import { useColorScheme } from "nativewind";
-import Header from "../components/Header";
 import React from "react";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { router } from "expo-router";
+import { Stack } from "expo-router";
 
 const SettingsPage = () => {
   const { colorScheme, toggleColorScheme } = useColorScheme();
@@ -27,33 +26,29 @@ const SettingsPage = () => {
   ];
 
   return (
-    <View className="flex-1 bg-background">
-      <Header
-        title="Ustawienia"
-        leftHeader={{
-          icon: "arrow-left",
-          onPress: () => router.back(),
-        }}
-      />
-      {options.map((option, index) => (
-        <View key={index}>
-          <View
-            className="flex-row p-7 items-center justify-between"
-            key={index}
-          >
-            <Text className="text-xl text-text-primary">{option.title}</Text>
-            <TouchableOpacity onPress={option.function}>
-              <MaterialCommunityIcons
-                name={option.icon}
-                size={30}
-                className="text-primary"
-              />
-            </TouchableOpacity>
+    <>
+      <Stack.Screen options={{ headerRight: null }} />
+      <View className="flex-1 bg-background">
+        {options.map((option, index) => (
+          <View key={index}>
+            <View
+              className="flex-row p-7 items-center justify-between"
+              key={index}
+            >
+              <Text className="text-xl text-text-primary">{option.title}</Text>
+              <TouchableOpacity onPress={option.function}>
+                <MaterialCommunityIcons
+                  name={option.icon}
+                  size={30}
+                  className="text-primary"
+                />
+              </TouchableOpacity>
+            </View>
+            {index !== options.length - 1 && <Divider />}
           </View>
-          {index !== options.length - 1 && <Divider />}
-        </View>
-      ))}
-    </View>
+        ))}
+      </View>
+    </>
   );
 };
 

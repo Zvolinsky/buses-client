@@ -2,11 +2,9 @@ import { View, Text, TouchableOpacity, FlatList } from "react-native";
 import { cssInterop } from "nativewind";
 import "./global.css";
 import React from "react";
-import Header from "../components/Header";
 import { ListRenderItem } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { Href, useRouter } from "expo-router";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 type RouteItem = {
   id: number;
@@ -76,13 +74,6 @@ const HomePage = () => {
 
   return (
     <View className="flex-1 bg-background">
-      <Header
-        title="MKS Mobile"
-        rightHeader={{
-          icon: "cog",
-          onPress: () => router.push("settings"),
-        }}
-      />
       <FlatList
         data={routes}
         renderItem={renderCard}

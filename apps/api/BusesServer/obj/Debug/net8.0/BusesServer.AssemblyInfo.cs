@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BusesServer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b2aeeab279197622ea4c6f00934c6a806985d7ff")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+22d229deefb95e3b033cd971af2c73cf8eacd1c3")]
 [assembly: System.Reflection.AssemblyProductAttribute("BusesServer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BusesServer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,6 +1,5 @@
 import { View, Text } from "react-native";
-import Header from "../../components/Header";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { Stack, useLocalSearchParams } from "expo-router";
 import { fetchDepartures } from "../../services/api";
 import TabNavigator from "../../components/TabNavigator";
 import { useQuery } from "@tanstack/react-query";
@@ -26,7 +25,6 @@ const SchedulePage = () => {
     busStopName,
     direction,
   } = useLocalSearchParams();
-  const router = useRouter();
 
   const { data: departures, isLoading } = useQuery({
     queryFn: async () => {
@@ -52,24 +50,16 @@ const SchedulePage = () => {
   }
 
   return (
-    <View className="bg-background flex-1" pointerEvents="auto">
-      <Header
-        title={`Rozkład jazdy - ${busName}`}
-        leftHeader={{
-          icon: "arrow-left",
-          onPress: () => router.back(),
-        }}
-        rightHeader={{
-          icon: "cog",
-          onPress: () => router.push("settings"),
-        }}
-      />
-      <View className="gap-3 p-7">
-        <Text className="text-text-primary text-2xl">{busStopName}</Text>
-        <Text className="text-text-primary text-xl">{direction}</Text>
+    <>
+      <Stack.Screen options={{ title: `Rozkład linii ${busName}` }} />
+      <View className="bg-background flex-1">
+        <View className="gap-3 p-7">
+          <Text className="text-text-primary text-2xl">{busStopName}</Text>
+          <Text className="text-text-primary text-xl">{direction}</Text>
+        </View>
+        {departures && <TabNavigator data={departures} />}
       </View>
-      {departures && <TabNavigator data={departures} />}
-    </View>
+    </>
   );
 };
 

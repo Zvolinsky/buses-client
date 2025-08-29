@@ -1,12 +1,9 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { TextInput, IconButton } from "react-native-paper";
 import Map from "../../components/Map";
-import Header from "../../components/Header";
 import { useState } from "react";
-import { useRouter } from "expo-router";
 
 const SearchConnectionPage = () => {
-  const router = useRouter();
   const [pointA, setPointA] = useState(null);
   const [pointB, setPointB] = useState(null);
   const [settingPoint, setSettingPoint] = useState<string>("A");
@@ -28,17 +25,6 @@ const SearchConnectionPage = () => {
   };
   return (
     <View className="flex-1 bg-background">
-      <Header
-        title="Wyszukaj połączenie"
-        leftHeader={{
-          icon: "arrow-left",
-          onPress: () => router.back(),
-        }}
-        rightHeader={{
-          icon: "cog",
-          onPress: () => router.push("settings"),
-        }}
-      />
       <View className="p-7">
         <TextInput
           label="Z miejsca"

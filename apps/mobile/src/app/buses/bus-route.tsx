@@ -5,15 +5,13 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { Stack, useLocalSearchParams } from "expo-router";
 import { Departure } from "../../types/databaseTypes";
 import { fetchBusRoute } from "../../services/api";
 import { ListRenderItem } from "react-native";
-import Header from "../../components/Header";
 import { useQuery } from "@tanstack/react-query";
 
 const BusRoutePage = () => {
-  const router = useRouter();
   const { busRouteId, busName, direction } = useLocalSearchParams();
 
   const { data: busRoute, isLoading } = useQuery({
@@ -52,32 +50,24 @@ const BusRoutePage = () => {
   }
 
   return (
-    <View className="bg-background flex-1">
-      <Header
-        title={`Trasa linii ${busName}`}
-        leftHeader={{
-          icon: "arrow-left",
-          onPress: () => router.back(),
-        }}
-        rightHeader={{
-          icon: "cog",
-          onPress: () => router.push("settings"),
-        }}
-      />
-      <ScrollView>
-        <View className="gap-3 p-7">
-          <Text className="text-text-primary text-xl">{direction}</Text>
-        </View>
-        <FlatList
-          data={busRoute}
-          renderItem={renderItem}
-          ItemSeparatorComponent={() => (
-            <View className="h-0.5 bg-slate-500"></View>
-          )}
-          scrollEnabled={false}
-        />
-      </ScrollView>
-    </View>
+    <>
+      <Stack.Screen options={{ title: `Trasa linii ${busName}` }} />
+      <View className="bg-background flex-1">
+        <ScrollView>
+          <View className="gap-3 p-7">
+            <Text className="text-text-primary text-xl">{direction}</Text>
+          </View>
+          <FlatList
+            data={busRoute}
+            renderItem={renderItem}
+            ItemSeparatorComponent={() => (
+              <View className="h-0.5 bg-slate-500"></View>
+            )}
+            scrollEnabled={false}
+          />
+        </ScrollView>
+      </View>
+    </>
   );
 };
 

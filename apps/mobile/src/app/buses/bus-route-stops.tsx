@@ -1,12 +1,10 @@
 import { View, Text, ScrollView } from "react-native";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
 import { fetchBusRouteDirections } from "../../services/api";
-import Header from "../../components/Header";
 import Accordion from "../../components/Accordion";
 import { useQuery } from "@tanstack/react-query";
 
 const BusRoutesPage = () => {
-  const router = useRouter();
   const { busId, busName } = useLocalSearchParams();
   const { data: busRouteDirections, isLoading } = useQuery({
     queryFn: () => fetchBusRouteDirections(busId as unknown as number),
@@ -23,17 +21,6 @@ const BusRoutesPage = () => {
 
   return (
     <View className="bg-background flex-1">
-      <Header
-        title="Wybierz przystanek"
-        leftHeader={{
-          icon: "arrow-left",
-          onPress: () => router.back(),
-        }}
-        rightHeader={{
-          icon: "cog",
-          onPress: () => router.push("settings"),
-        }}
-      />
       <ScrollView>
         <View className="gap-3 p-7">
           <Text className="text-text-primary text-3xl">Linia {busName}</Text>

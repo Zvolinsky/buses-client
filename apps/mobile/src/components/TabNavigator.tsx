@@ -95,7 +95,6 @@ export const Tab = ({ route }) => {
 };
 
 const TabNavigator: React.FC<TabNavigatorProps> = ({ data }) => {
-  console.log(data[0][0]);
   const [index, setIndex] = useState<number>(0);
 
   const [routes] = useState([
