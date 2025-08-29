@@ -2,15 +2,16 @@ import { Stack, useRouter } from "expo-router";
 import "./global.css";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar, TouchableOpacity, View } from "react-native";
-import { useColorScheme } from "nativewind";
+import { useColorScheme, cssInterop } from "nativewind";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { SCREEN_TITLES } from "../config/screenTitles";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function RootLayout() {
   const { colorScheme } = useColorScheme();
   const queryClient = new QueryClient();
   const router = useRouter();
+
   return (
     <QueryClientProvider client={queryClient}>
       <View className={`flex-1 ${colorScheme === "dark" ? "dark" : ""}`}>
@@ -49,3 +50,7 @@ export default function RootLayout() {
     </QueryClientProvider>
   );
 }
+
+cssInterop(MaterialCommunityIcons, {
+  className: "style",
+});

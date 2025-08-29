@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { Divider } from "react-native-paper";
 import { useColorScheme } from "nativewind";
 import React from "react";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Stack } from "expo-router";
 
 const SettingsPage = () => {
@@ -38,7 +38,7 @@ const SettingsPage = () => {
               <Text className="text-xl text-text-primary">{option.title}</Text>
               <TouchableOpacity onPress={option.function}>
                 <MaterialCommunityIcons
-                  name={option.icon}
+                  name={option.icon as any}
                   size={30}
                   className="text-primary"
                 />

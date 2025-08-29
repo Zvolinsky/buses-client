@@ -1,9 +1,8 @@
 import { View, Text, TouchableOpacity, FlatList } from "react-native";
-import { cssInterop } from "nativewind";
 import "./global.css";
 import React from "react";
 import { ListRenderItem } from "react-native";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Href, useRouter } from "expo-router";
 
 type RouteItem = {
@@ -17,13 +16,6 @@ type CardProps = {
   route: RouteItem;
   router: any;
 };
-
-cssInterop(MaterialCommunityIcons, {
-  className: {
-    target: "style",
-    nativeStyleToProp: { height: true, width: true, size: true },
-  },
-});
 
 const routes: RouteItem[] = [
   {
@@ -100,7 +92,7 @@ const Card: React.FC<CardProps> = ({ route, router }) => {
       onPress={handlePress}
     >
       <MaterialCommunityIcons
-        name={route.iconName}
+        name={route.iconName as any}
         size={50}
         className="text-primary"
       />
