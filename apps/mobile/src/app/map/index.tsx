@@ -2,6 +2,7 @@ import { View, Text } from "react-native";
 import { fetchBusStops } from "../../services/api";
 import Map from "../../components/Map";
 import { useQuery } from "@tanstack/react-query";
+import Loader from "../../components/Loader";
 
 const MapPage = () => {
   const { data: busStops, isLoading } = useQuery({
@@ -9,14 +10,7 @@ const MapPage = () => {
     queryKey: ["busStops"],
   });
 
-  if (isLoading) {
-    return (
-      <View className="flex-1 items-center justify-center bg-background">
-        <Text className="text-lg font-semibold text-primary">Ładowanie...</Text>
-      </View>
-    );
-  }
-
+  if (isLoading) return <Loader />;
   return (
     <View className="flex-1 bg-background">
       <Map setter={false} busStops={busStops} />

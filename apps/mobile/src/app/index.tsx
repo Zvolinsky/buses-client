@@ -54,29 +54,6 @@ const routes: RouteItem[] = [
   },
 ];
 
-const HomePage = () => {
-  const router = useRouter();
-  const renderCard: ListRenderItem<RouteItem> = ({
-    item,
-  }: {
-    item: RouteItem;
-  }) => {
-    return <Card route={item} router={router} />;
-  };
-
-  return (
-    <View className="flex-1 bg-background">
-      <FlatList
-        data={routes}
-        renderItem={renderCard}
-        keyExtractor={(item) => item.id.toString()}
-        numColumns={2}
-        className="m-2"
-      />
-    </View>
-  );
-};
-
 const Card: React.FC<CardProps> = ({ route, router }) => {
   const handlePress = (): void => {
     if (route.screenName) {
@@ -98,6 +75,29 @@ const Card: React.FC<CardProps> = ({ route, router }) => {
       />
       <Text className="text-lg text-text-primary">{route.content}</Text>
     </TouchableOpacity>
+  );
+};
+
+const renderCard: ListRenderItem<RouteItem> = ({
+  item,
+}: {
+  item: RouteItem;
+}) => {
+  const router = useRouter();
+  return <Card route={item} router={router} />;
+};
+
+const HomePage = () => {
+  return (
+    <View className="flex-1 bg-background">
+      <FlatList
+        data={routes}
+        renderItem={renderCard}
+        keyExtractor={(item) => item.id.toString()}
+        numColumns={2}
+        className="m-2"
+      />
+    </View>
   );
 };
 

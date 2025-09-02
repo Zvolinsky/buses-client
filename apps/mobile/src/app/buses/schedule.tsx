@@ -4,6 +4,7 @@ import { fetchDepartures } from "../../services/api";
 import TabNavigator from "../../components/TabNavigator";
 import { useQuery } from "@tanstack/react-query";
 import { groupByDayOfWeek, groupByHours } from "../../utils/reduce";
+import Loader from "../../components/Loader";
 
 export type GroupedDeparture = {
   id: number;
@@ -41,14 +42,7 @@ const SchedulePage = () => {
     queryKey: ["departures", busStopId],
   });
 
-  if (isLoading) {
-    return (
-      <View className="flex-1 items-center justify-center bg-background">
-        <Text className="text-lg font-semibold text-primary">Ładowanie...</Text>
-      </View>
-    );
-  }
-
+  if (isLoading) return <Loader />;
   return (
     <>
       <Stack.Screen options={{ title: `Rozkład linii ${busName}` }} />

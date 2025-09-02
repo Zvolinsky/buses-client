@@ -3,6 +3,18 @@ import { useLocalSearchParams } from "expo-router";
 import { fetchBusRouteDirections } from "../../services/api";
 import Accordion from "../../components/Accordion";
 import { useQuery } from "@tanstack/react-query";
+import Loader from "../../components/Loader";
+
+const renderDirections = (busRouteDirections) =>
+  busRouteDirections.map((direction) => (
+    <Accordion
+      key={direction.id}
+      data={{
+        busRouteDirectionId: direction.id,
+        direction: direction.name,
+      }}
+    />
+  ));
 
 const BusRoutesPage = () => {
   const { busId, busName } = useLocalSearchParams();
@@ -11,14 +23,7 @@ const BusRoutesPage = () => {
     queryKey: ["busRouteDirections", busId],
   });
 
-  if (isLoading) {
-    return (
-      <View className="flex-1 items-center justify-center bg-background">
-        <Text className="text-lg font-semibold text-primary">Ładowanie...</Text>
-      </View>
-    );
-  }
-
+  if (isLoading) return <Loader />;
   return (
     <View className="bg-background flex-1">
       <ScrollView>
@@ -31,20 +36,7 @@ const BusRoutesPage = () => {
           )}
         </View>
         {busRouteDirections && (
-          <View>
-            <Accordion
-              data={{
-                busRouteDirectionId: busRouteDirections[0].id,
-                direction: busRouteDirections[0].name,
-              }}
-            />
-            <Accordion
-              data={{
-                busRouteDirectionId: busRouteDirections[1].id,
-                direction: busRouteDirections[1].name,
-              }}
-            />
-          </View>
+          <View>{renderDirections(busRouteDirections)}</View>
         )}
       </ScrollView>
     </View>

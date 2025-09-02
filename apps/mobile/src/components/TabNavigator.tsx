@@ -17,45 +17,48 @@ type TabNavigatorProps = {
   data: GroupedDeparture[];
 };
 
-export const Tab = ({ route }) => {
-  const { data } = route.props;
+const renderDepartureButtons = (item) => {
   const { busId, busStopId, busName, direction } = useLocalSearchParams();
-
   const router = useRouter();
 
-  const renderDepartureButtons = (item) => {
-    return (
-      <View className="flex-row gap-10">
-        {item.departures?.map((item, index) => (
-          <TouchableOpacity
-            key={index}
-            onPress={() =>
-              router.push({
-                pathname: "/buses/bus-route",
-                params: {
-                  busId: busId,
-                  busStopId: busStopId,
-                  busName: busName,
-                  direction: direction,
-                  busRouteId: item.busRouteId,
-                },
-              })
-            }
-            className="flex-row items-end"
-          >
-            <Text className="text-text-primary text-xl font-bold">
-              {String(item.minute).padStart(2, "0")}
+  return (
+    <View className="flex-row gap-10">
+      {item.departures?.map((item) => (
+        <TouchableOpacity
+          key={item.busRouteId}
+          onPress={() =>
+            router.push({
+              pathname: "/buses/bus-route",
+              params: {
+                busId: busId,
+                busStopId: busStopId,
+                busName: busName,
+                direction: direction,
+                busRouteId: item.busRouteId,
+              },
+            })
+          }
+          className="flex-row items-end"
+        >
+          <Text className="text-text-primary text-xl font-bold">
+            {String(item.minute).padStart(2, "0")}
+          </Text>
+          {item.routeInfo?.map((info) => (
+            <Text
+              key={item.busRouteId + info}
+              className="text-base text-text-primary"
+            >
+              {routeInfo[info]}
             </Text>
-            {item.routeInfo?.map((info) => (
-              <Text key={info} className="text-base text-text-primary">
-                {routeInfo[info]}
-              </Text>
-            ))}
-          </TouchableOpacity>
-        ))}
-      </View>
-    );
-  };
+          ))}
+        </TouchableOpacity>
+      ))}
+    </View>
+  );
+};
+
+export const Tab = ({ route }) => {
+  const { data } = route.props;
 
   return (
     <View>
@@ -71,7 +74,7 @@ export const Tab = ({ route }) => {
           </DataTable.Header>
           <ScrollView nestedScrollEnabled>
             {data?.map((item) => (
-              <DataTable.Row key={item.id}>
+              <DataTable.Row key={item.departures[0].busRouteId}>
                 <DataTable.Cell style={{ flex: 1 }}>
                   <Text className="text-text-primary text-xl">{item.hour}</Text>
                 </DataTable.Cell>

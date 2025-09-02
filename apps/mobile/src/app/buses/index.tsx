@@ -9,16 +9,13 @@ import { Bus } from "../../types/databaseTypes";
 import { fetchBuses } from "../../services/api";
 import { useRouter } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
+import Loader from "../../components/Loader";
+import { useState } from "react";
+import Filter from "../../components/Filter";
 
-const BusesPage = () => {
+const renderItem: ListRenderItem<Bus> = ({ item }: { item: Bus }) => {
   const router = useRouter();
-
-  const { data: buses, isLoading } = useQuery({
-    queryFn: () => fetchBuses(),
-    queryKey: ["buses"],
-  });
-
-  const renderItem: ListRenderItem<Bus> = ({ item }) => (
+  return (
     <View className="w-1/4 ">
       <TouchableOpacity
         key={item.id}
@@ -36,21 +33,24 @@ const BusesPage = () => {
       </TouchableOpacity>
     </View>
   );
+};
 
-  if (isLoading) {
-    return (
-      <View className="flex-1 items-center justify-center bg-background">
-        <Text className="text-lg font-semibold text-primary">Ładowanie...</Text>
-      </View>
-    );
-  }
+const BusesPage = () => {
+  const { data: buses, isLoading } = useQuery({
+    queryFn: () => fetchBuses(),
+    queryKey: ["buses"],
+  });
+  const [filteredBuses, setFilteredBuses] = useState<Bus[] | null>(null);
 
+  if (isLoading) return <Loader />;
   return (
     <View className="flex-1 bg-background">
+      <Filter filterFunction={setFilteredBuses} data={buses} />
       <FlatList
+        keyExtractor={(item) => item.id.toString()}
         className="p-3"
         ItemSeparatorComponent={() => <View className="h-5">{""}</View>}
-        data={buses}
+        data={filteredBuses ? filteredBuses : buses}
         renderItem={renderItem}
         horizontal={false}
         numColumns={4}

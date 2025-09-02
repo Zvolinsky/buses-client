@@ -1,69 +1,43 @@
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
-import { Searchbar, Button } from "react-native-paper";
 import { ListRenderItem } from "react-native";
 import { BusStop } from "../../types/databaseTypes";
 import { fetchBusStops } from "../../services/api";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
+import Filter from "../../components/Filter";
+import Loader from "../../components/Loader";
+
+const renderItem: ListRenderItem<BusStop> = ({ item }: { item: BusStop }) => {
+  const router = useRouter();
+  return (
+    <TouchableOpacity
+      className="p-4 bg-background"
+      onPress={() => {
+        router.push({
+          pathname: "/bus-stops/schedule",
+          params: { busStopId: item.id, busStopName: item.name },
+        });
+      }}
+    >
+      <Text className="text-text-primary">{item.name}</Text>
+    </TouchableOpacity>
+  );
+};
 
 const BusStopsPage = () => {
-  const router = useRouter();
-  const [searchQuery, setSearchQuery] = useState<string | null>("");
-  const [filteredBusStops, setFilteredBusStops] = useState<BusStop[] | null>(
-    null
-  );
   const { data: busStops, isLoading } = useQuery({
     queryFn: () => fetchBusStops(),
     queryKey: ["busStops"],
   });
+  const [filteredBusStops, setFilteredBusStops] = useState<BusStop[] | null>(
+    null
+  );
 
-  useEffect(() => {
-    if (searchQuery.trim() === "") {
-      setFilteredBusStops(null);
-      return;
-    }
-    const query = searchQuery?.toLowerCase().trim() || "";
-    const startsWith = busStops.filter((item) =>
-      item.name.toLowerCase().startsWith(query)
-    );
-    const includes = busStops.filter((item) =>
-      item.name.toLowerCase().includes(query)
-    );
-    setFilteredBusStops([...new Set([...startsWith, ...includes])]);
-  }, [searchQuery]);
-
-  const renderItem: ListRenderItem<BusStop> = ({ item }: { item: BusStop }) => {
-    return (
-      <TouchableOpacity
-        className="p-4 bg-background"
-        onPress={() => {
-          router.push({
-            pathname: "/bus-stops/schedule",
-            params: { busStopId: item.id, busStopName: item.name },
-          });
-        }}
-      >
-        <Text className="text-text-primary">{item.name}</Text>
-      </TouchableOpacity>
-    );
-  };
-
-  if (isLoading) {
-    return (
-      <View className="flex-1 items-center justify-center bg-background">
-        <Text className="text-lg font-semibold text-primary">Ładowanie...</Text>
-      </View>
-    );
-  }
-
+  if (isLoading) return <Loader />;
   return (
-    <View className="flex-1 bg-background gap-3">
-      <Searchbar
-        placeholder="Wyszukaj przystanek..."
-        onChangeText={setSearchQuery}
-        value={searchQuery}
-      />
+    <View className="flex-1 bg-background gap-3 p-3">
+      <Filter filterFunction={setFilteredBusStops} data={busStops} />
       <FlatList
         data={filteredBusStops ? filteredBusStops : busStops}
         renderItem={renderItem}
